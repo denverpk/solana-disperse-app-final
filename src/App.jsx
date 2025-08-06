@@ -12,7 +12,7 @@ function App() {
     try {
       setStatus('Processing...');
 
-      const connection = new Connection('https://api.mainnet-beta.solana.com');
+      const connection = new Connection('https://solana-mainnet.g.alchemy.com/v2/t1AL5dEx7SLqxkam4yE40SAkPbj5gSYa');
       const secretKey = bs58.decode(privateKey.trim());
       const sender = Keypair.fromSecretKey(secretKey);
 
