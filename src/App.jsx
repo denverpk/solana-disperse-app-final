@@ -20,12 +20,15 @@ const sender = Keypair.fromSecretKey(Uint8Array.from(secretKey));
 
       const recipientList = recipients.trim().split('\n').filter(Boolean);
 
-      for (let recipient of recipientList) {
-        const instruction = SystemProgram.transfer({
-          fromPubkey: sender.publicKey,
-          toPubkey: new PublicKey(recipient.trim()),
-          lamports: Math.floor(parseFloat(amount) * 1e9),
-        });
+      for (let recipient of recipients) {
+  const instruction = SystemProgram.transfer({
+    fromPubkey: sender.publicKey,
+    toPubkey: new PublicKey(recipient),  // <- Yeh line important hai
+    lamports: Math.floor(parseFloat(amount) * 1e9),
+  });
+  transaction.add(instruction);
+}
+
 
         const transaction = new Transaction().add(instruction);
         const signature = await sendAndConfirmTransaction(connection, transaction, [sender]);
