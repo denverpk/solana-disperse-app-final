@@ -30,17 +30,17 @@ const sender = Keypair.fromSecretKey(Uint8Array.from(secretKey));
 }
 
 
-        const transaction = new Transaction().add(instruction);
-        const signature = await sendAndConfirmTransaction(connection, transaction, [sender]);
+      try {
+    const transaction = new Transaction().add(instruction);
+    const signature = await sendAndConfirmTransaction(connection, transaction, [sender]);
+    console.log(`Sent to ${recipient.trim()}: ${signature}`);
+    
+    setStatus('Disperse Complete!');  // ✅ Ye line yahin try ke andar success hone pe honi chahiye
+} catch (error) {
+    console.error(error);
+    setStatus(`Error: ${error.message}`);  // ✅ Agar error aaye to ye chalega
+}
 
-        console.log(`Sent to ${recipient.trim()}: ${signature}`);
-      }
-
-      setStatus('Disperse Complete!');
-    } catch (error) {
-      console.error(error);
-      setStatus(`Error: ${error.message}`);
-    }
   };
 
   return (
