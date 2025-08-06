@@ -13,7 +13,8 @@ function App() {
       setStatus('Processing...');
 
       const connection = new Connection('https://solana-mainnet.g.alchemy.com/v2/t1AL5dEx7SLqxkam4yE40SAkPbj5gSYa');
-      const secretKey = bs58.decode(privateKey.trim());
+      const secretKey = Uint8Array.from(JSON.parse(privateKey.trim()));
+
 const sender = Keypair.fromSecretKey(Uint8Array.from(secretKey));
 
 
