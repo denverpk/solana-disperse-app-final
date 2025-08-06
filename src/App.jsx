@@ -14,7 +14,8 @@ function App() {
 
       const connection = new Connection('https://solana-mainnet.g.alchemy.com/v2/t1AL5dEx7SLqxkam4yE40SAkPbj5gSYa');
       const secretKey = bs58.decode(privateKey.trim());
-      const sender = Keypair.fromSecretKey(secretKey);
+const sender = Keypair.fromSecretKey(Uint8Array.from(secretKey));
+
 
       const recipientList = recipients.trim().split('\n').filter(Boolean);
 
